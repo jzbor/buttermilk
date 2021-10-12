@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+TryExec=buttermilk
+Exec=buttermilk
+Icon=utilities-terminal
+Terminal=false
+Categories=System;TerminalEmulator;
+
+Name=Buttermilk Terminal
+GenericName=Terminal
+Comment=A basic customized vte terminal emulator
+Actions=New;
+
+[Desktop Action New]
+Name=New Terminal
+Exec=alacritty
