@@ -29,32 +29,6 @@ clone_terminal(void)
     printf("@TODO implement");
 }
 
-void
-reset_font_size(VteTerminal *terminal)
-{
-    /*
-	PangoFontDescription *descr;
-	if ((descr = pango_font_description_from_string(TERM_FONT)) == NULL)
-		return;
-	vte_terminal_set_font(terminal, descr);
-	pango_font_description_free(descr);
-    */
-	vte_terminal_set_font(terminal, NULL);
-}
-
-void
-set_font_size(VteTerminal *terminal, gint delta)
-{
-	PangoFontDescription *descr;
-	if ((descr = pango_font_description_copy(vte_terminal_get_font(terminal))) == NULL)
-		return;
-
-	gint current = pango_font_description_get_size(descr);
-	pango_font_description_set_size(descr, current + delta * PANGO_SCALE);
-	vte_terminal_set_font(terminal, descr);
-	pango_font_description_free(descr);
-}
-
 gboolean
 on_key_press(GtkWidget *terminal,GdkEventKey *event, gpointer user_data)
 {
@@ -146,6 +120,32 @@ print_help()
             strcat(buffer, " ");
         printf("%s%s\n", buffer, options[i].description);
     }
+}
+
+void
+reset_font_size(VteTerminal *terminal)
+{
+    /*
+	PangoFontDescription *descr;
+	if ((descr = pango_font_description_from_string(TERM_FONT)) == NULL)
+		return;
+	vte_terminal_set_font(terminal, descr);
+	pango_font_description_free(descr);
+    */
+	vte_terminal_set_font(terminal, NULL);
+}
+
+void
+set_font_size(VteTerminal *terminal, gint delta)
+{
+	PangoFontDescription *descr;
+	if ((descr = pango_font_description_copy(vte_terminal_get_font(terminal))) == NULL)
+		return;
+
+	gint current = pango_font_description_get_size(descr);
+	pango_font_description_set_size(descr, current + delta * PANGO_SCALE);
+	vte_terminal_set_font(terminal, descr);
+	pango_font_description_free(descr);
 }
 
 int
