@@ -14,7 +14,7 @@ typedef struct {
 /* CONSTANTS */
 static const char cfg_name[] = "buttermilk";
 static const char cfg_default_title[] = "Buttermilk Terminal";
-static const char cfg_title[] = "Buttermilk Terminal: %s"; /* may contain %s to be formatted from terminal */
+static const char cfg_title[] = "%s"; /* may contain %s to be formatted from terminal */
 static const char cfg_file_name[] = "buttermilk.conf";
 static const Config default_config = {
     .scrollback_lines   = 10000,
