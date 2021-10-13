@@ -6,6 +6,7 @@ This is a basic personal terminal emulator using the VTE library.
 **Table of Contents**
 
 - [Key bindings:](#key-bindings)
+- [Installation](#installation)
 - [Configuration](#configuration)
 - [Terminal cloning](#terminal-cloning)
 - [Credits](#credits)
@@ -18,6 +19,13 @@ Buttermilk features only a few simple keybindings, which are optimized for the d
 * `Ctrl+minus` - make the font smaller
 * `Ctrl+equals` - reset the font size
 * `Ctrl+return` - launch new instance (also take a look at [Terminal cloning](#terminal-cloning))
+
+
+## Installation
+Just run the following command inside project folder:
+```sh
+sudo make install clean
+```
 
 
 ## Configuration
@@ -34,6 +42,7 @@ buttermilk -c > ~/.config/buttermilk/buttermilk.conf
 ## Terminal cloning
 You can clone the terminal with `Ctrl+Enter`, but in order to keep the current working directory you have to source `vte.sh`.
 On Arch Linux it is located at `/etc/profile.d/vte.sh` and you can source it in your `~/.profile` for example.
+
 
 ## Credits
 This program is based on a tutorial by Vincent Bernat: "[Writing your own terminal emulator](https://vincent.bernat.ch/en/blog/2017-write-own-terminal)"
