@@ -159,14 +159,20 @@ print_help()
 void
 reset_font_size(VteTerminal *terminal)
 {
-    /*
-	PangoFontDescription *descr;
-	if ((descr = pango_font_description_from_string(TERM_FONT)) == NULL)
-		return;
-	vte_terminal_set_font(terminal, descr);
-	pango_font_description_free(descr);
-    */
-	vte_terminal_set_font(terminal, NULL);
+    if (config->fontname[0]) {
+        printf("DEBUG: Fontname set\n");
+        PangoFontDescription *descr;
+        if ((descr = pango_font_description_from_string(config->fontname)) == NULL) {
+            fprintf(stderr, "Unable to load font '%s' - falling back to default font\n", config->fontname);
+            vte_terminal_set_font(terminal, NULL);
+            return;
+        }
+        vte_terminal_set_font(terminal, descr);
+        pango_font_description_free(descr);
+    } else {
+        printf("DEBUG: No fontname set\n");
+        vte_terminal_set_font(terminal, NULL);
+    }
 }
 
 void
@@ -243,6 +249,7 @@ main(int argc, char *argv[])
 
     /* Customize terminal */
     config = load_config_files();
+    reset_font_size(VTE_TERMINAL(terminal));
     vte_terminal_set_colors(VTE_TERMINAL(terminal), &config->fgcolor,
             &config->bgcolor, config->colorscheme->palette, PALETTE_SIZE);
     vte_terminal_set_scrollback_lines(VTE_TERMINAL(terminal), config->scrollback_lines);

@@ -73,10 +73,9 @@ print_config(Config *cfg)
         printf("%s ", colorschemes[i]->name);
     printf("\n");
     printf("colorscheme         = %s\n", cfg->colorscheme->name);
-    /* printf("foreground          = 0x%08x\n", cfg->fgcolor); */
-    /* printf("background          = 0x%08x\n", cfg->bgcolor); */
     printf("foreground          = %s\n", gdk_rgba_to_string(&cfg->fgcolor));
     printf("background          = %s\n", gdk_rgba_to_string(&cfg->bgcolor));
+    printf("font                = %s\n", cfg->fontname);
 }
 
 int
@@ -136,10 +135,10 @@ cfg_handler(void* user, const char* section, const char* name, const char* value
             }
         } else if (NAME_MATCH("foreground")) {
             gdk_rgba_parse(&cfg->bgcolor, value);
-            printf("Reading color (%s): %s -> %s\n", name, value, gdk_rgba_to_string(&cfg->bgcolor));
         } else if (NAME_MATCH("background")) {
             gdk_rgba_parse(&cfg->fgcolor, value);
-            printf("Reading color (%s): %s -> %s\n", name, value, gdk_rgba_to_string(&cfg->fgcolor));
+        } else if (NAME_MATCH("font")) {
+            strncpy(cfg->fontname, value, CFG_MAX_FONTNAME_LENGHT);
         } else {
             return 0;
         }
