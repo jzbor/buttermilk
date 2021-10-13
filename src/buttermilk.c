@@ -29,7 +29,9 @@ static Option options[] = {
         .description = "set working directory" },
 };
 
+static char **args;
 static Config *config;
+static GtkWidget *window, *terminal;
 
 void
 child_ready(VteTerminal *terminal, GPid pid, GError *error, gpointer user_data)
@@ -41,7 +43,15 @@ child_ready(VteTerminal *terminal, GPid pid, GError *error, gpointer user_data)
 void
 clone_terminal(void)
 {
-    printf("@TODO implement");
+    char *path = vte_terminal_get_current_directory_uri(terminal);
+    if (fork() == 0) {
+        if (!path || chdir(path)) {
+            fprintf(stderr, "Unable to set working dir '%s' for new terminal\n", path);
+        }
+        if (execvp(args[0], args) == -1) {
+            fprintf(stderr, "Cloning the terminal failed\n");
+        }
+    }
 }
 
 gboolean
@@ -166,8 +176,8 @@ set_font_size(VteTerminal *terminal, gint delta)
 int
 main(int argc, char *argv[])
 {
-    GtkWidget *window, *terminal;
     int status = 0;
+    args = argv;
 
     if ((status = parse_options(argc, argv)))
         return status;
