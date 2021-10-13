@@ -1,3 +1,7 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+/* STRUCTS */
 typedef struct {
     int scrollback_lines;
     int scroll_keys, scroll_output, hide_mouse;
@@ -6,7 +10,7 @@ typedef struct {
 } Config;
 
 
-
+/* CONSTANTS */
 static const char cfg_name[] = "buttermilk";
 static const char cfg_default_title[] = "Buttermilk Terminal";
 static const char cfg_title[] = "Buttermilk Terminal: %s"; /* may contain %s to be formatted from terminal */
@@ -19,5 +23,8 @@ static const Config default_config = {
     .fgcolor            = clrscm_tango.foreground,
     .bgcolor            = clrscm_tango.background,
 };
-static Config config = default_config;
 
+/* FUNCTIONS */
+Config *get_config(void);
+
+#endif /* CONFIG_H */

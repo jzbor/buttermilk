@@ -7,8 +7,11 @@ all: buttermilk
 buttermilk.o: buttermilk.c buttermilk.h config.h
 	${CC} -g -c -O2 -Wall ${VTEFLAGS} src/buttermilk.c
 
-buttermilk: buttermilk.o
-	${CC} -g -o $@ buttermilk.o ${VTELIBS} -g
+config.o: config.c config.h
+	${CC} -g -c -O2 -Wall ${VTEFLAGS} src/config.c
+
+buttermilk: buttermilk.o config.o
+	${CC} -g -o $@ buttermilk.o config.o ${VTELIBS} -g
 
 clean:
 	rm buttermilk.o
