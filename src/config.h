@@ -1,6 +1,11 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+
+/* MACROS */
+#define SECTION_MATCH(S)        (strcmp(section, (S)) == 0)
+#define NAME_MATCH(N)           (strcmp(name, (N)) == 0)
+
 /* STRUCTS */
 typedef struct {
     int scrollback_lines;
@@ -25,6 +30,6 @@ static const Config default_config = {
 };
 
 /* FUNCTIONS */
-Config *get_config(void);
+Config *get_config(char *path);
 
 #endif /* CONFIG_H */

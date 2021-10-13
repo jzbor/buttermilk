@@ -11,7 +11,7 @@ config.o: config.c config.h
 	${CC} -g -c -O2 -Wall ${VTEFLAGS} src/config.c
 
 buttermilk: buttermilk.o config.o
-	${CC} -g -o $@ buttermilk.o config.o ${VTELIBS} -g
+	${CC} -g -o $@ buttermilk.o config.o ${VTELIBS} ${INIHLIBS} -g
 
 clean:
 	rm buttermilk.o
