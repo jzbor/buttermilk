@@ -15,11 +15,14 @@ static void set_font_size(VteTerminal *terminal, gint delta);
 
 /* OPTIONS */
 #define PARAM_HELP          0
-#define PARAM_COMMAND       1
-#define PARAM_WORKINGDIR    2
+#define PARAM_CONFIG        1
+#define PARAM_COMMAND       2
+#define PARAM_WORKINGDIR    3
 static Option options[] = {
     { .id = "help",       .lname = "--help",                .sname = "-h", .isflag = 1,
         .description = "print help" },
+    { .id = "config",     .lname = "--config",              .sname = "-c", .isflag = 1,
+        .description = "print the current configuration" },
     { .id = "command",    .lname = "--execute",             .sname = "-e",
         .description = "execute command in terminal" },
     { .id = "workingdir", .lname = "--working-directory",   .sname = "-w",
@@ -178,6 +181,11 @@ main(int argc, char *argv[])
                     options[PARAM_WORKINGDIR].value);
             return status;
         }
+    }
+    if (options[PARAM_CONFIG].isset) {
+        config = load_config_files();
+        print_config(config);
+        return status;
     }
 
     /* Initialise GTK, the window and the terminal */

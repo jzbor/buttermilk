@@ -8,9 +8,10 @@
 
 
 /* MACROS */
-#define SECTION_MATCH(S)        (strcmp(section, (S)) == 0)
-#define NAME_MATCH(N)           (strcmp(name, (N)) == 0)
 #define CLRSCM_MATCH(C)         (strcmp(str, (C)) == 0)
+#define NAME_MATCH(N)           (strcmp(name, (N)) == 0)
+#define SECTION_MATCH(S)        (strcmp(section, (S)) == 0)
+#define LENGTH(X)               (sizeof X / sizeof X[0])
 
 /* FUNCTIONS */
 static int str_to_bool(const char *str);
@@ -60,11 +61,16 @@ print_config(Config *cfg)
 {
     printf("[config]\n");
     printf("scrollback_lines    = %d\n", cfg->scrollback_lines);
+    printf("# boolean options accept '1' and 'true' as true, everything else as false\n");
     printf("scroll_on_output    = %d\n", cfg->scroll_output);
     printf("scroll_on_keys      = %d\n", cfg->scroll_keys);
     printf("hide_mouse          = %d\n", cfg->scroll_keys);
     printf("\n");
     printf("[theming]\n");
+    printf("# Available colorschemes (also sets fg and bg colors):\n#\t");
+    for (int i = 0; i < LENGTH(colorschemes); i++)
+        printf("%s ", colorschemes[i]->name);
+    printf("\n");
     printf("colorscheme         = %s\n", cfg->colorscheme->name);
 }
 
@@ -77,24 +83,13 @@ str_to_bool(const char *str)
 const ColorScheme *
 str_to_clrscm(const char *str)
 {
-    if (CLRSCM_MATCH("gruvbox"))
-        return &clrscm_gruvbox;
-    else if (CLRSCM_MATCH("linux"))
-        return &clrscm_linux;
-    else if (CLRSCM_MATCH("nord"))
-        return &clrscm_nord;
-    else if (CLRSCM_MATCH("rxvt"))
-        return &clrscm_rxvt;
-    else if (CLRSCM_MATCH("solarized"))
-        return &clrscm_solarized;
-    else if (CLRSCM_MATCH("tango"))
-        return &clrscm_tango;
-    else if (CLRSCM_MATCH("xterm"))
-        return &clrscm_xterm;
-    else {
-        fprintf(stderr, "Colorscheme '%s' not found\n", str);
-        return NULL;
+    for (int i = 0; i < LENGTH(colorschemes); i++) {
+        if (strcmp(str, colorschemes[i]->name) == 0)
+            return colorschemes[i];
     }
+
+    fprintf(stderr, "Colorscheme '%s' not found\n", str);
+    return NULL;
 }
 
 int

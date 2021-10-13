@@ -167,6 +167,9 @@ static const ColorScheme clrscm_solarized   = { "solarized", solarized_palette[1
 static const ColorScheme clrscm_tango       = { "tango",     tango_palette[15], tango_palette[0], tango_palette };
 static const ColorScheme clrscm_xterm       = { "xterm",     xterm_palette[15], xterm_palette[0], xterm_palette };
 
+static const ColorScheme *colorschemes[] = { &clrscm_gruvbox, &clrscm_linux, &clrscm_nord,
+    &clrscm_rxvt, &clrscm_solarized, &clrscm_tango, &clrscm_xterm, };
+
 
 
 /*
