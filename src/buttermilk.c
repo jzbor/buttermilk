@@ -3,6 +3,16 @@
 #include "colors.h"
 #include "config.h"
 
+/* FUNCTIONS */
+static void child_ready(VteTerminal *terminal, GPid pid, GError *error, gpointer user_data);
+static void clone_terminal(void);
+static gboolean on_key_press(GtkWidget *terminal,GdkEventKey *event, gpointer user_data);
+static gboolean on_title_changed(GtkWidget *terminal, gpointer user_data);
+static int parse_options(int argc, char *argv[]);
+static void print_help();
+static void reset_font_size(VteTerminal *terminal);
+static void set_font_size(VteTerminal *terminal, gint delta);
+
 /* OPTIONS */
 #define PARAM_HELP          0
 #define PARAM_COMMAND       1
