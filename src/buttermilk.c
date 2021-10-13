@@ -63,7 +63,7 @@ on_key_press(GtkWidget *terminal,GdkEventKey *event, gpointer user_data)
 {
     switch (event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK | GDK_MOD1_MASK)) {
         case GDK_CONTROL_MASK | GDK_SHIFT_MASK:
-            switch(event->keyval) {
+            switch (event->keyval) {
                 case GDK_KEY_V:
                     vte_terminal_paste_clipboard(VTE_TERMINAL(terminal));
                     return TRUE;
@@ -76,7 +76,7 @@ on_key_press(GtkWidget *terminal,GdkEventKey *event, gpointer user_data)
             }
             break;
         case GDK_CONTROL_MASK:
-            switch(event->keyval) {
+            switch (event->keyval) {
                 case GDK_KEY_minus:
                     set_font_size(VTE_TERMINAL(terminal), -1);
                     return TRUE;
@@ -89,6 +89,11 @@ on_key_press(GtkWidget *terminal,GdkEventKey *event, gpointer user_data)
             }
             break;
         case GDK_SHIFT_MASK:
+            switch (event->keyval) {
+                case GDK_KEY_Paste:
+                    vte_terminal_paste_primary(VTE_TERMINAL(terminal));
+                    return TRUE;
+            }
             break;
         case GDK_MOD1_MASK:
             break;
