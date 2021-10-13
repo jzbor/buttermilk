@@ -40,8 +40,12 @@ buttermilk -c > ~/.config/buttermilk/buttermilk.conf
 ```
 
 ## Terminal cloning
-You can clone the terminal with `Ctrl+Enter`, but in order to keep the current working directory you have to source `vte.sh`.
-On Arch Linux it is located at `/etc/profile.d/vte.sh` and you can source it in your `~/.profile` for example.
+You can clone the terminal with `Ctrl+Enter`, but in order to keep the current working directory `vte.sh` has to be loaded.
+On Arch Linux it is located at `/etc/profile.d/vte.sh`.
+If it is not loaded automatically you can try adding this line to your `.bashrc`/`.zshrc`:
+```sh
+[ -f "/etc/profile.d/vte.sh" ] && . /etc/profile.d/vte.sh
+```
 
 
 ## Credits
