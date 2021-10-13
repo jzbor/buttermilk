@@ -205,8 +205,12 @@ main(int argc, char *argv[])
             return status;
         }
     }
+
+    /* Load config */
+    config = load_config_files();
+
+    /* Print config if requested */
     if (options[PARAM_CONFIG].isset) {
-        config = load_config_files();
         print_config(config);
         return status;
     }
@@ -246,7 +250,6 @@ main(int argc, char *argv[])
     g_signal_connect(terminal, "window-title-changed", G_CALLBACK(on_title_changed), GTK_WINDOW(window));
 
     /* Customize terminal */
-    config = load_config_files();
     reset_font_size(VTE_TERMINAL(terminal));
     vte_terminal_set_colors(VTE_TERMINAL(terminal), &config->fgcolor,
             &config->bgcolor, config->colorscheme->palette, PALETTE_SIZE);
