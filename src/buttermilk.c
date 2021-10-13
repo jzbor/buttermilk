@@ -203,12 +203,12 @@ main(int argc, char *argv[])
     g_signal_connect(terminal, "window-title-changed", G_CALLBACK(on_title_changed), GTK_WINDOW(window));
 
     /* Customize terminal */
-    vte_terminal_set_colors(VTE_TERMINAL(terminal), &colorscheme->foreground,
-            &colorscheme->background, colorscheme->palette, PALETTE_SIZE);
-    vte_terminal_set_scrollback_lines(VTE_TERMINAL(terminal), cfg_scrollback_lines);
-    vte_terminal_set_scroll_on_output(VTE_TERMINAL(terminal), cfg_scroll_output);
-    vte_terminal_set_scroll_on_keystroke(VTE_TERMINAL(terminal), cfg_scroll_keys);
-    vte_terminal_set_mouse_autohide(VTE_TERMINAL(terminal), cfg_hide_mouse);
+    vte_terminal_set_colors(VTE_TERMINAL(terminal), &config.colorscheme->foreground,
+            &config.colorscheme->background, config.colorscheme->palette, PALETTE_SIZE);
+    vte_terminal_set_scrollback_lines(VTE_TERMINAL(terminal), config.scrollback_lines);
+    vte_terminal_set_scroll_on_output(VTE_TERMINAL(terminal), config.scroll_output);
+    vte_terminal_set_scroll_on_keystroke(VTE_TERMINAL(terminal), config.scroll_keys);
+    vte_terminal_set_mouse_autohide(VTE_TERMINAL(terminal), config.hide_mouse);
 
     /* Put widgets together and run the main loop */
     gtk_container_add(GTK_CONTAINER(window), terminal);
