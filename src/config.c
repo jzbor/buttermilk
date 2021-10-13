@@ -62,10 +62,10 @@ print_config(Config *cfg)
     printf("[config]\n");
     printf("scrollback_lines    = %d\n", cfg->scrollback_lines);
     printf("# boolean options accept '1' and 'true' as true, everything else as false\n");
-    printf("scroll_on_output    = %d\n", cfg->scroll_output);
-    printf("scroll_on_keys      = %d\n", cfg->scroll_keys);
-    printf("hide_mouse          = %d\n", cfg->scroll_keys);
     printf("allow_hyperlink     = %d\n", cfg->allow_hyperlink);
+    printf("hide_mouse          = %d\n", cfg->hide_mouse);
+    printf("scroll_on_keys      = %d\n", cfg->scroll_keys);
+    printf("scroll_on_output    = %d\n", cfg->scroll_output);
     printf("\n");
     printf("[theming]\n");
     printf("# Available colorschemes (also sets fg and bg colors):\n#\t");
