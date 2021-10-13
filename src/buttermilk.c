@@ -251,13 +251,15 @@ main(int argc, char *argv[])
 
     /* Customize terminal */
     reset_font_size(VTE_TERMINAL(terminal));
+    vte_terminal_set_allow_hyperlink(VTE_TERMINAL(terminal), config->allow_hyperlink);
+    vte_terminal_set_cursor_blink_mode(VTE_TERMINAL(terminal),
+            config->blinking_cursor ? VTE_CURSOR_BLINK_ON : VTE_CURSOR_BLINK_OFF);
     vte_terminal_set_colors(VTE_TERMINAL(terminal), &config->fgcolor,
             &config->bgcolor, config->colorscheme->palette, PALETTE_SIZE);
-    vte_terminal_set_scrollback_lines(VTE_TERMINAL(terminal), config->scrollback_lines);
-    vte_terminal_set_scroll_on_output(VTE_TERMINAL(terminal), config->scroll_output);
-    vte_terminal_set_scroll_on_keystroke(VTE_TERMINAL(terminal), config->scroll_keys);
     vte_terminal_set_mouse_autohide(VTE_TERMINAL(terminal), config->hide_mouse);
-    vte_terminal_set_allow_hyperlink(VTE_TERMINAL(terminal), config->allow_hyperlink);
+    vte_terminal_set_scroll_on_keystroke(VTE_TERMINAL(terminal), config->scroll_keys);
+    vte_terminal_set_scroll_on_output(VTE_TERMINAL(terminal), config->scroll_output);
+    vte_terminal_set_scrollback_lines(VTE_TERMINAL(terminal), config->scrollback_lines);
 
     /* Put widgets together and run the main loop */
     gtk_container_add(GTK_CONTAINER(window), terminal);

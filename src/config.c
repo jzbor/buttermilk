@@ -63,6 +63,7 @@ print_config(Config *cfg)
     printf("scrollback_lines    = %d\n", cfg->scrollback_lines);
     printf("# boolean options accept '1' and 'true' as true, everything else as false\n");
     printf("allow_hyperlink     = %d\n", cfg->allow_hyperlink);
+    printf("blinking_cursor     = %d\n", cfg->blinking_cursor);
     printf("hide_mouse          = %d\n", cfg->hide_mouse);
     printf("scroll_on_keys      = %d\n", cfg->scroll_keys);
     printf("scroll_on_output    = %d\n", cfg->scroll_output);
@@ -119,7 +120,9 @@ cfg_handler(void* user, const char* section, const char* name, const char* value
                 cfg->scrollback_lines = ibuffer;
             }
         } else if (NAME_MATCH("allow_hyperlink")) {
-            cfg->hide_mouse = str_to_bool(value);
+            cfg->allow_hyperlink = str_to_bool(value);
+        } else if (NAME_MATCH("blinking_cursor")) {
+            cfg->blinking_cursor = str_to_bool(value);
         } else if (NAME_MATCH("hide_mouse")) {
             cfg->hide_mouse = str_to_bool(value);
         } else if (NAME_MATCH("scroll_on_keys")) {

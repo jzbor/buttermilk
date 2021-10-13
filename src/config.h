@@ -7,7 +7,7 @@
 typedef struct {
     char fontname[CFG_MAX_FONTNAME_LENGHT + 1];
     int scrollback_lines;
-    int allow_hyperlink, hide_mouse, scroll_keys, scroll_output;
+    int allow_hyperlink, blinking_cursor, hide_mouse, scroll_keys, scroll_output;
     const ColorScheme *colorscheme;
     GdkRGBA fgcolor, bgcolor;
 } Config;
@@ -22,6 +22,7 @@ static const Config default_config = {
     .fontname           = {0},
     .scrollback_lines   = 10000,
     .allow_hyperlink    = 1,
+    .blinking_cursor    = 1,
     .hide_mouse         = 1,
     .scroll_keys        = 1,
     .scroll_output      = 0,
