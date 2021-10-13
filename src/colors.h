@@ -159,13 +159,13 @@ static const GdkRGBA rxvt_palette[PALETTE_SIZE] = {
     {1,        1,        1,        1 }
 };
 
+static const ColorScheme clrscm_gruvbox     = { "gruvbox",   gruvbox_palette[15], gruvbox_palette[0], gruvbox_palette };
+static const ColorScheme clrscm_linux       = { "linux",     linux_palette[15], linux_palette[0], linux_palette };
+static const ColorScheme clrscm_nord        = { "nord",      nord_palette[15], nord_palette[0], nord_palette };
+static const ColorScheme clrscm_rxvt        = { "rxvt",      rxvt_palette[15], rxvt_palette[0], rxvt_palette };
 static const ColorScheme clrscm_solarized   = { "solarized", solarized_palette[15], solarized_palette[0], solarized_palette };
 static const ColorScheme clrscm_tango       = { "tango",     tango_palette[15], tango_palette[0], tango_palette };
-static const ColorScheme clrscm_gruvbox     = { "gruvbox",   gruvbox_palette[15], gruvbox_palette[0], gruvbox_palette };
-static const ColorScheme clrscm_nord        = { "nord",      nord_palette[15], nord_palette[0], nord_palette };
 static const ColorScheme clrscm_xterm       = { "xterm",     xterm_palette[15], xterm_palette[0], xterm_palette };
-static const ColorScheme clrscm_linux       = { "linux",     linux_palette[15], linux_palette[0], linux_palette };
-static const ColorScheme clrscm_rxvt        = { "rxvt",      rxvt_palette[15], rxvt_palette[0], rxvt_palette };
 
 
 

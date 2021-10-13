@@ -1,4 +1,5 @@
 #include <ini.h>
+#include <limits.h>
 #include <stdlib.h>
 #include <vte/vte.h>
 
@@ -6,8 +7,14 @@
 #include "config.h"
 
 
+/* MACROS */
+#define SECTION_MATCH(S)        (strcmp(section, (S)) == 0)
+#define NAME_MATCH(N)           (strcmp(name, (N)) == 0)
+#define CLRSCM_MATCH(C)         (strcmp(str, (C)) == 0)
+
 /* FUNCTIONS */
 static int str_to_bool(const char *str);
+static const ColorScheme *str_to_clrscm(const char *str);
 static int str_to_int(int *dest, const char *str);
 static int cfg_handler(void* user, const char* section, const char* name, const char* value);
 
@@ -16,18 +23,78 @@ static Config config = default_config;
 Config *
 get_config(char *path)
 {
+    int status;
     if (!path) return &config;
 
-    if (ini_parse(path, cfg_handler, &config) < 0) {
-        printf("Unable to load configuration from %s\n", path);
+    status = ini_parse(path, cfg_handler, &config);
+    if (status < 0) {
+        fprintf(stderr, "Unable to read configuration from %s\n", path);
+    } else if (status) {
+        fprintf(stderr, "Bad config file %s (first error on line %d)\n", path, status);
     }
     return &config;
+}
+
+Config *
+load_config_files(void)
+{
+    char config_file[PATH_MAX] = {0};
+
+    /* load global config */
+    get_config("/etc/buttermilk.conf");
+
+    if (getenv("XDG_CONFIG_HOME")) {
+        sprintf(config_file, "%s/%s/%s", getenv("XDG_CONFIG_HOME"), "buttermilk", cfg_file_name);
+    } else if (getenv("HOME")){
+        sprintf(config_file, "%s/.config/%s/%s", getenv("HOME"), "buttermilk", cfg_file_name);
+    } else {
+        sprintf(config_file, "%s", cfg_file_name);
+    }
+    get_config(config_file);
+
+    return &config;
+}
+
+void
+print_config(Config *cfg)
+{
+    printf("[config]\n");
+    printf("scrollback_lines    = %d\n", cfg->scrollback_lines);
+    printf("scroll_on_output    = %d\n", cfg->scroll_output);
+    printf("scroll_on_keys      = %d\n", cfg->scroll_keys);
+    printf("hide_mouse          = %d\n", cfg->scroll_keys);
+    printf("\n");
+    printf("[theming]\n");
+    printf("colorscheme         = %s\n", cfg->colorscheme->name);
 }
 
 int
 str_to_bool(const char *str)
 {
     return (strcmp(str, "true") == 0 || strcmp(str, "1") == 0);
+}
+
+const ColorScheme *
+str_to_clrscm(const char *str)
+{
+    if (CLRSCM_MATCH("gruvbox"))
+        return &clrscm_gruvbox;
+    else if (CLRSCM_MATCH("linux"))
+        return &clrscm_linux;
+    else if (CLRSCM_MATCH("nord"))
+        return &clrscm_nord;
+    else if (CLRSCM_MATCH("rxvt"))
+        return &clrscm_rxvt;
+    else if (CLRSCM_MATCH("solarized"))
+        return &clrscm_solarized;
+    else if (CLRSCM_MATCH("tango"))
+        return &clrscm_tango;
+    else if (CLRSCM_MATCH("xterm"))
+        return &clrscm_xterm;
+    else {
+        fprintf(stderr, "Colorscheme '%s' not found\n", str);
+        return NULL;
+    }
 }
 
 int
@@ -40,8 +107,10 @@ str_to_int(int *dest, const char *str)
 int
 cfg_handler(void* user, const char* section, const char* name, const char* value)
 {
-    Config *cfg = (Config*)user;
     int ibuffer;
+    const ColorScheme *cbuffer;
+    Config *cfg = (Config*)user;
+
     if (SECTION_MATCH("config")) {
         if (NAME_MATCH("scrollback_lines")) {
             if (str_to_int(&ibuffer, value)) {
@@ -55,6 +124,11 @@ cfg_handler(void* user, const char* section, const char* name, const char* value
             cfg->hide_mouse = str_to_bool(value);
         } else {
             return 0;
+        }
+    } else if (SECTION_MATCH("theming")) {
+        if (NAME_MATCH("colorscheme")) {
+            if ((cbuffer = str_to_clrscm(value)))
+                cfg->colorscheme = cbuffer;
         }
     } else {
         return 0;

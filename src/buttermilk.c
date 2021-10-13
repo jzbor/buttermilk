@@ -215,7 +215,7 @@ main(int argc, char *argv[])
     g_signal_connect(terminal, "window-title-changed", G_CALLBACK(on_title_changed), GTK_WINDOW(window));
 
     /* Customize terminal */
-    config = get_config();
+    config = load_config_files();
     vte_terminal_set_colors(VTE_TERMINAL(terminal), &config->colorscheme->foreground,
             &config->colorscheme->background, config->colorscheme->palette, PALETTE_SIZE);
     vte_terminal_set_scrollback_lines(VTE_TERMINAL(terminal), config->scrollback_lines);
