@@ -75,7 +75,10 @@ print_config(Config *cfg)
     printf("colorscheme         = %s\n", cfg->colorscheme->name);
     printf("foreground          = %s\n", gdk_rgba_to_string(&cfg->fgcolor));
     printf("background          = %s\n", gdk_rgba_to_string(&cfg->bgcolor));
-    printf("font                = %s\n", cfg->fontname);
+    if (cfg->fontname[0])
+        printf("font                = %s\n", cfg->fontname);
+    else
+        printf("# font              = <system default>\n");
 }
 
 int
