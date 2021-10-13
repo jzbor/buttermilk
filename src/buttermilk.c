@@ -243,8 +243,8 @@ main(int argc, char *argv[])
 
     /* Customize terminal */
     config = load_config_files();
-    vte_terminal_set_colors(VTE_TERMINAL(terminal), &config->colorscheme->foreground,
-            &config->colorscheme->background, config->colorscheme->palette, PALETTE_SIZE);
+    vte_terminal_set_colors(VTE_TERMINAL(terminal), &config->fgcolor,
+            &config->bgcolor, config->colorscheme->palette, PALETTE_SIZE);
     vte_terminal_set_scrollback_lines(VTE_TERMINAL(terminal), config->scrollback_lines);
     vte_terminal_set_scroll_on_output(VTE_TERMINAL(terminal), config->scroll_output);
     vte_terminal_set_scroll_on_keystroke(VTE_TERMINAL(terminal), config->scroll_keys);

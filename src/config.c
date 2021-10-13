@@ -73,6 +73,10 @@ print_config(Config *cfg)
         printf("%s ", colorschemes[i]->name);
     printf("\n");
     printf("colorscheme         = %s\n", cfg->colorscheme->name);
+    /* printf("foreground          = 0x%08x\n", cfg->fgcolor); */
+    /* printf("background          = 0x%08x\n", cfg->bgcolor); */
+    printf("foreground          = %s\n", gdk_rgba_to_string(&cfg->fgcolor));
+    printf("background          = %s\n", gdk_rgba_to_string(&cfg->bgcolor));
 }
 
 int
@@ -125,8 +129,19 @@ cfg_handler(void* user, const char* section, const char* name, const char* value
         }
     } else if (SECTION_MATCH("theming")) {
         if (NAME_MATCH("colorscheme")) {
-            if ((cbuffer = str_to_clrscm(value)))
+            if ((cbuffer = str_to_clrscm(value))) {
                 cfg->colorscheme = cbuffer;
+                cfg->fgcolor = cbuffer->foreground;
+                cfg->bgcolor = cbuffer->background;
+            }
+        } else if (NAME_MATCH("foreground")) {
+            gdk_rgba_parse(&cfg->bgcolor, value);
+            printf("Reading color (%s): %s -> %s\n", name, value, gdk_rgba_to_string(&cfg->bgcolor));
+        } else if (NAME_MATCH("background")) {
+            gdk_rgba_parse(&cfg->fgcolor, value);
+            printf("Reading color (%s): %s -> %s\n", name, value, gdk_rgba_to_string(&cfg->fgcolor));
+        } else {
+            return 0;
         }
     } else {
         return 0;
