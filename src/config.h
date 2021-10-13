@@ -5,7 +5,7 @@
 /* STRUCTS */
 typedef struct {
     int scrollback_lines;
-    int scroll_keys, scroll_output, hide_mouse;
+    int allow_hyperlink, hide_mouse, scroll_keys, scroll_output;
     const ColorScheme *colorscheme;
     GdkRGBA fgcolor, bgcolor;
 } Config;
@@ -21,6 +21,7 @@ static const Config default_config = {
     .scroll_output      = 0,
     .scroll_keys        = 1,
     .hide_mouse         = 1,
+    .allow_hyperlink    = 1,
     .colorscheme        = &clrscm_gruvbox,
     .fgcolor            = clrscm_gruvbox.foreground,
     .bgcolor            = clrscm_gruvbox.background,

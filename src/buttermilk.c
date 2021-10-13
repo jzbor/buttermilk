@@ -43,13 +43,17 @@ child_ready(VteTerminal *terminal, GPid pid, GError *error, gpointer user_data)
 void
 clone_terminal(void)
 {
-    char *path = vte_terminal_get_current_directory_uri(terminal);
+    const char *path = vte_terminal_get_current_directory_uri((VteTerminal *) terminal);
+    if (path)
+        path += strlen("file://");
     if (fork() == 0) {
+        /* gtk_main_quit(); */
         if (!path || chdir(path)) {
             fprintf(stderr, "Unable to set working dir '%s' for new terminal\n", path);
         }
         if (execvp(args[0], args) == -1) {
-            fprintf(stderr, "Cloning the terminal failed\n");
+            perror("Cloning the terminal failed");
+            _exit(errno);
         }
     }
 }
@@ -240,6 +244,7 @@ main(int argc, char *argv[])
     vte_terminal_set_scroll_on_output(VTE_TERMINAL(terminal), config->scroll_output);
     vte_terminal_set_scroll_on_keystroke(VTE_TERMINAL(terminal), config->scroll_keys);
     vte_terminal_set_mouse_autohide(VTE_TERMINAL(terminal), config->hide_mouse);
+    vte_terminal_set_allow_hyperlink(VTE_TERMINAL(terminal), config->allow_hyperlink);
 
     /* Put widgets together and run the main loop */
     gtk_container_add(GTK_CONTAINER(window), terminal);

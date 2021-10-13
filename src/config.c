@@ -65,6 +65,7 @@ print_config(Config *cfg)
     printf("scroll_on_output    = %d\n", cfg->scroll_output);
     printf("scroll_on_keys      = %d\n", cfg->scroll_keys);
     printf("hide_mouse          = %d\n", cfg->scroll_keys);
+    printf("allow_hyperlink     = %d\n", cfg->allow_hyperlink);
     printf("\n");
     printf("[theming]\n");
     printf("# Available colorschemes (also sets fg and bg colors):\n#\t");
@@ -111,12 +112,14 @@ cfg_handler(void* user, const char* section, const char* name, const char* value
             if (str_to_int(&ibuffer, value)) {
                 cfg->scrollback_lines = ibuffer;
             }
-        } else if (NAME_MATCH("scroll_on_output")) {
-            cfg->scroll_output = str_to_bool(value);
-        } else if (NAME_MATCH("scroll_on_keys")) {
-            cfg->scroll_keys = str_to_bool(value);
+        } else if (NAME_MATCH("allow_hyperlink")) {
+            cfg->hide_mouse = str_to_bool(value);
         } else if (NAME_MATCH("hide_mouse")) {
             cfg->hide_mouse = str_to_bool(value);
+        } else if (NAME_MATCH("scroll_on_keys")) {
+            cfg->scroll_keys = str_to_bool(value);
+        } else if (NAME_MATCH("scroll_on_output")) {
+            cfg->scroll_output = str_to_bool(value);
         } else {
             return 0;
         }
