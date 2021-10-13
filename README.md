@@ -49,7 +49,7 @@ If it is not loaded automatically you can try adding this line to your `.bashrc`
 
 
 ## Credits
-This program is based on a tutorial by Vincent Bernat: "[Writing your own terminal emulator](https://vincent.bernat.ch/en/blog/2017-write-own-terminal)"
+This program is based on a tutorial by Vincent Bernat: "[Writing your own terminal emulator](https://vincent.bernat.ch/en/blog/2017-write-own-terminal)".
 I also took borrowed some code from his own implementation of a VTE terminal emulator, called [vbeterm](https://github.com/vincentbernat/vbeterm).
 
 [VTE documentation](https://developer-old.gnome.org/vte/unstable/VteTerminal.html)
