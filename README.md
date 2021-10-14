@@ -22,8 +22,30 @@ Buttermilk features only a few simple keybindings, which are optimized for the d
 
 
 ## Installation
-Just run the following command inside project folder:
+
+### Arch, Manjaro, etc.
+If you are on Arch, Manjaro or another distro that supports the AUR you can install this
+software directly from there.
+It is available as `buttermilk`.
+If you are using yay:
 ```sh
+yay -S buttermilk
+```
+otherwise:
+```sh
+git clone https://aur.archlinux.org/buttermilk.git
+cd buttermilk
+makepkg -si
+```
+
+
+### From source
+Installation should be fairly simple on other distros as well.
+First make sure you have the dependencies (namely `vte` and `libinih`) installed.
+Then clone the repository and run the following make command inside project folder:
+```sh
+git clone https://github.com/jzbor/buttermilk
+cd buttermilk
 sudo make install clean
 ```
 
