@@ -5,15 +5,17 @@ This is a basic personal terminal emulator using the VTE library.
 <!-- DO NOT EDIT THIS SECTION, INSTEAD RE-RUN doctoc.sh TO UPDATE -->
 **Table of Contents**
 
-- [Key bindings:](#key-bindings)
+- [Key bindings](#key-bindings)
 - [Installation](#installation)
+  - [Arch, Manjaro, etc.](#arch-manjaro-etc)
+  - [From source](#from-source)
 - [Configuration](#configuration)
 - [Terminal cloning](#terminal-cloning)
 - [Credits](#credits)
 
 <!-- END doctoc.sh generated TOC please keep comment here to allow auto update -->
 
-## Key bindings:
+## Key bindings
 Buttermilk features only a few simple keybindings, which are optimized for the default English keyboard layout:
 * `Ctrl+Shift+plus` - make the font bigger
 * `Ctrl+minus` - make the font smaller
