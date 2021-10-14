@@ -20,4 +20,8 @@ install: all
 	install -Dm755 buttermilk -t ${DESTDIR}${PREFIX}/bin
 	install -Dm644 buttermilk.desktop -t ${DESTDIR}${PREFIX}/share/applications
 
-.PHONY: all clean install
+uninstall:
+	rm -v ${DESTDIR}${PREFIX}/bin/buttermilk
+	rm -v ${DESTDIR}${PREFIX}/share/applications/buttermilk.desktop
+
+.PHONY: all clean install uninstall
