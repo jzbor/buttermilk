@@ -14,7 +14,7 @@ buttermilk: buttermilk.o config.o
 	${CC} -g -o $@ buttermilk.o config.o ${VTELIBS} ${INIHLIBS} -g
 
 clean:
-	rm buttermilk.o
+	rm -f buttermilk buttermilk.o config.o
 
 install: all
 	install -Dm755 buttermilk -t ${DESTDIR}${PREFIX}/bin
