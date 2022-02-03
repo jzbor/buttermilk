@@ -3,6 +3,9 @@
 #include "colors.h"
 #include "config.h"
 
+#define SIZE_COLUMNS    100
+#define SIZE_ROWS       40
+
 /* FUNCTIONS */
 static void child_ready(VteTerminal *terminal, GPid pid, GError *error, gpointer user_data);
 static void clone_terminal(void);
@@ -263,6 +266,7 @@ main(int argc, char *argv[])
 
     /* Put widgets together and run the main loop */
     gtk_container_add(GTK_CONTAINER(window), terminal);
+    vte_terminal_set_size(VTE_TERMINAL(terminal), SIZE_COLUMNS, SIZE_ROWS);
     gtk_widget_show_all(window);
     gtk_main();
 
