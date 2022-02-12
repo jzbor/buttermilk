@@ -140,9 +140,9 @@ cfg_handler(void* user, const char* section, const char* name, const char* value
                 cfg->bgcolor = cbuffer->background;
             }
         } else if (NAME_MATCH("foreground")) {
-            gdk_rgba_parse(&cfg->bgcolor, value);
-        } else if (NAME_MATCH("background")) {
             gdk_rgba_parse(&cfg->fgcolor, value);
+        } else if (NAME_MATCH("background")) {
+            gdk_rgba_parse(&cfg->bgcolor, value);
         } else if (NAME_MATCH("font")) {
             strncpy(cfg->fontname, value, CFG_MAX_FONTNAME_LENGHT);
         } else {
