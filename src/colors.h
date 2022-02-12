@@ -159,16 +159,37 @@ static const GdkRGBA rxvt_palette[PALETTE_SIZE] = {
     {1,        1,        1,        1 }
 };
 
+static const GdkRGBA seoul256_palette[PALETTE_SIZE] = {
+    /* {0.305882, 0.305882, 0.305882, 1 }, /1* #4e4e4e *1/ */
+    {0.109803, 0.109803, 0.109803, 1 }, /* #1c1c1c */
+    {0.839215, 0.529411, 0.529411, 1 }, /* #d68787 */
+    {0.372549, 0.525490, 0.372549, 1 }, /* #5f865f */
+    {0.847058, 0.686274, 0.372549, 1 }, /* #d8af5f */
+    {0.521568, 0.678431, 0.831372, 1 }, /* #85add4 */
+    {0.843137, 0.686274, 0.686274, 1 }, /* #d7afaf */
+    {0.529411, 0.686274, 0.686274, 1 }, /* #87afaf */
+    {0.815686, 0.815686, 0.815686, 1 }, /* #d0d0d0 */
+    {0.384313, 0.384313, 0.384313, 1 }, /* #626262 */
+    {0.843137, 0.372549, 0.529411, 1 }, /* #d75f87 */
+    {0.529411, 0.686274, 0.529411, 1 }, /* #87af87 */
+    {1.000000, 0.843137, 0.529411, 1 }, /* #ffd787 */
+    {0.678431, 0.831372, 0.984313, 1 }, /* #add4fb */
+    {1.000000, 0.686274, 0.686274, 1 }, /* #ffafaf */
+    {0.529411, 0.843137, 0.843137, 1 }, /* #87d7d7 */
+    {0.843137, 0.843137, 0.843137, 1 }, /* #e4e4e4 */
+};
+
 static const ColorScheme clrscm_gruvbox     = { "gruvbox",   gruvbox_palette[15], gruvbox_palette[0], gruvbox_palette };
 static const ColorScheme clrscm_linux       = { "linux",     linux_palette[15], linux_palette[0], linux_palette };
 static const ColorScheme clrscm_nord        = { "nord",      nord_palette[15], nord_palette[0], nord_palette };
 static const ColorScheme clrscm_rxvt        = { "rxvt",      rxvt_palette[15], rxvt_palette[0], rxvt_palette };
+static const ColorScheme clrscm_seoul256    = { "seoul256",  seoul256_palette[15], seoul256_palette[0], seoul256_palette };
 static const ColorScheme clrscm_solarized   = { "solarized", solarized_palette[15], solarized_palette[0], solarized_palette };
 static const ColorScheme clrscm_tango       = { "tango",     tango_palette[15], tango_palette[0], tango_palette };
 static const ColorScheme clrscm_xterm       = { "xterm",     xterm_palette[15], xterm_palette[0], xterm_palette };
 
 static const ColorScheme *colorschemes[] = { &clrscm_gruvbox, &clrscm_linux, &clrscm_nord,
-    &clrscm_rxvt, &clrscm_solarized, &clrscm_tango, &clrscm_xterm, };
+    &clrscm_rxvt, &clrscm_seoul256, &clrscm_solarized, &clrscm_tango, &clrscm_xterm, };
 
 
 
