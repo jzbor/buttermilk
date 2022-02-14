@@ -13,4 +13,4 @@ Actions=New;
 
 [Desktop Action New]
 Name=New Terminal
-Exec=alacritty
+Exec=buttermilk
