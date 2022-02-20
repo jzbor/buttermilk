@@ -2,6 +2,7 @@
 #include "buttermilk.h"
 #include "colors.h"
 #include "config.h"
+#include <errno.h>
 
 #define SIZE_COLUMNS    100
 #define SIZE_ROWS       40
